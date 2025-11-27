@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Library Management System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Community Library Management System</h1>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="login.html">Login</a>
+                <a href="register.html">Register</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <h2>Welcome to Our Community Library</h2>
+            <p>Discover, borrow, and explore a world of knowledge. Search our extensive collection of books and manage your library account with ease.</p>
+        </section>
+
+        <section class="search-section">
+            <h2>Search Books</h2>
+            <form id="search-form">
+                <div class="search-filters">
+                    <div class="form-group">
+                        <label for="search-title">Title:</label>
+                        <input type="text" id="search-title" placeholder="Enter book title">
+                    </div>
+                    <div class="form-group">
+                        <label for="search-author">Author:</label>
+                        <input type="text" id="search-author" placeholder="Enter author name">
+                    </div>
+                    <div class="form-group">
+                        <label for="search-isbn">ISBN:</label>
+                        <input type="text" id="search-isbn" placeholder="Enter ISBN">
+                    </div>
+                    <div class="form-group">
+                        <label for="search-category">Category:</label>
+                        <input type="text" id="search-category" placeholder="Enter category">
+                    </div>
+                </div>
+                <button type="submit" class="btn">Search</button>
+            </form>
+            <div id="search-message"></div>
+        </section>
+
+        <section class="results-section">
+            <div id="search-results"></div>
+        </section>
+
+        <section class="features">
+            <h2>Library Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>📚 Extensive Collection</h3>
+                    <p>Browse thousands of books across various categories and genres.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🔍 Easy Search</h3>
+                    <p>Find books quickly by title, author, ISBN, or category.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>📅 Online Reservations</h3>
+                    <p>Reserve books that are currently unavailable.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>💰 Automated Fines</h3>
+                    <p>Automatic fine calculation for overdue books.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>👤 Member Dashboard</h3>
+                    <p>Track your borrowed books and account status.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>📊 Admin Reports</h3>
+                    <p>Comprehensive reports for library management.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Community Library Management System. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>

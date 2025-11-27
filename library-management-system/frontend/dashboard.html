@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Community Library Management System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Community Library Management System</h1>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="#" id="logout-link">Logout</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section id="profile-section">
+            <h2>My Profile</h2>
+            <div id="profile-info"></div>
+        </section>
+
+        <section id="borrowed-books-section">
+            <h2>My Borrowed Books</h2>
+            <div id="borrowed-books"></div>
+        </section>
+
+        <section id="fines-section">
+            <h2>My Fines</h2>
+            <div id="fines-info"></div>
+        </section>
+
+        <section id="reservations-section">
+            <h2>My Reservations</h2>
+            <div id="reservations-list"></div>
+        </section>
+
+        <section id="reserve-book-section">
+            <h2>Reserve a Book</h2>
+            <form id="reserve-form">
+                <div class="form-group">
+                    <label for="reserve-book-id">Book ID:</label>
+                    <input type="number" id="reserve-book-id" required>
+                </div>
+                <button type="submit" class="btn">Reserve Book</button>
+            </form>
+            <div id="reserve-message"></div>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
