@@ -1,0 +1,2171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Library</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #FFF8F0;
+            color: #5D4037;
+            line-height: 1.6;
+        }
+
+        nav {
+            background: #5D4037;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #profile-avatar {
+            order: -1;
+            margin-right: 1.5rem;
+        }
+
+        #profile-initial {
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            background-color: #FFF8F0;
+            color: #5D4037;
+            border-radius: 50%;
+            display: inline-block;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border: 2px solid #8D6E63;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+
+        #profile-initial:hover {
+            background-color: #EDE7F6;
+            transform: scale(1.05);
+        }
+
+        .logo {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #D7CCC8;
+        }
+
+        .hero {
+            position: relative;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            z-index: -2;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(93, 64, 55, 0.7);
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            z-index: 1;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #8D6E63;
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-button:hover {
+            background: #A1887F;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(93, 64, 55, 0.08);
+            transition: transform 0.3s;
+            border: 1px solid #D7CCC8;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(93, 64, 55, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: #8D6E63;
+            margin-bottom: 1rem;
+        }
+
+        .search-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(93, 64, 55, 0.08);
+            border: 1px solid #D7CCC8;
+            margin: 2rem 0;
+        }
+
+        .search-section h2 {
+            color: #5D4037;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .search-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .search-bar input {
+            flex: 1 1 60%;
+            padding: 0.8rem 1.2rem;
+            font-size: 1rem;
+            border: 1px solid #BCAAA4;
+            border-radius: 8px;
+            outline: none;
+            transition: all 0.3s;
+            background-color: #FFF8F0;
+        }
+
+        .search-bar input:focus {
+            border-color: #8D6E63;
+            box-shadow: 0 0 0 3px rgba(141, 110, 99, 0.2);
+        }
+
+        .search-bar button {
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            border: none;
+            background-color: #5D4037;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .search-bar button:hover {
+            background-color: #8D6E63;
+            transform: translateY(-2px);
+        }
+
+        .catalog-section {
+            margin: 3rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #5D4037;
+            font-size: 2rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(93, 64, 55, 0.08);
+            border: 1px solid #D7CCC8;
+        }
+
+        th,
+        td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #D7CCC8;
+        }
+
+        th {
+            background-color: #F5F5F5;
+            cursor: pointer;
+            position: relative;
+            transition: background 0.3s;
+            font-weight: 600;
+            color: #5D4037;
+        }
+
+        th:hover {
+            background-color: #EDE7F6;
+        }
+
+        th.sort-asc::after {
+            content: " ▲";
+            font-size: 0.8rem;
+        }
+
+        th.sort-desc::after {
+            content: " ▼";
+            font-size: 0.8rem;
+        }
+
+        tr:hover {
+            background-color: #F3E5F5;
+        }
+
+        .status-available {
+            color: #2E7D32;
+            font-weight: 600;
+            background-color: rgba(46, 125, 50, 0.1);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            display: inline-block;
+        }
+
+        .status-borrowed {
+            color: #C62828;
+            font-weight: 600;
+            background-color: rgba(198, 40, 40, 0.1);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            display: inline-block;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .pagination button {
+            padding: 0.5rem 1rem;
+            border: 1px solid #5D4037;
+            background-color: white;
+            color: #5D4037;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .pagination button.active,
+        .pagination button:hover {
+            background-color: #8D6E63;
+            color: white;
+            transform: translateY(-1px);
+            border-color: #8D6E63;
+        }
+
+        footer {
+            background: #5D4037;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        .auth-page {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 80vh;
+            background-color: #FFF8F0;
+            padding: 2rem;
+        }
+
+        .auth-container {
+            background-color: white;
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(93, 64, 55, 0.15);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            border: 1px solid #D7CCC8;
+        }
+
+        .auth-container h2 {
+            color: #5D4037;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #5D4037;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #BCAAA4;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background-color: #FFF8F0;
+        }
+
+        .form-group input:focus {
+            border-color: #8D6E63;
+            box-shadow: 0 0 0 3px rgba(141, 110, 99, 0.2);
+        }
+
+        .auth-button {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            background-color: #5D4037;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin-top: 0.5rem;
+        }
+
+        .auth-button:hover {
+            background-color: #8D6E63;
+            transform: translateY(-2px);
+        }
+
+        .error-message {
+            color: #C62828;
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+            height: 1.2em;
+        }
+
+        .switch-form {
+            margin-top: 1.5rem;
+            font-size: 0.95rem;
+            color: #5D4037;
+        }
+
+        .switch-form a {
+            color: #8D6E63;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .switch-form a:hover {
+            color: #5D4037;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .profile-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(93, 64, 55, 0.15);
+            width: 100%;
+            max-width: 600px;
+            margin: 2rem auto;
+            border: 1px solid #D7CCC8;
+            text-align: left;
+        }
+
+        .profile-card h2 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .profile-detail {
+            margin-bottom: 1rem;
+            padding: 0.75rem;
+            background-color: #FFF8F0;
+            border-radius: 8px;
+            border-left: 5px solid #8D6E63;
+        }
+
+        .profile-detail strong {
+            display: inline-block;
+            min-width: 120px;
+            color: #5D4037;
+            font-weight: 700;
+        }
+
+        .dashboard-cards { 
+          display:flex;
+          flex-wrap:wrap;
+          gap:1.5rem; 
+          margin-bottom:2rem;
+        }
+
+       .card {
+        background:white;
+        padding:1.5rem;
+        border-radius:10px;
+        flex:1 1 250px;
+        box-shadow:0 4px 15px rgba(93,64,55,0.08);
+        border:1px solid #D7CCC8;
+       }
+      .card h3 { 
+        margin-bottom:.5rem;
+        color:#5D4037;
+       }
+
+        .admin-dashboard-cards {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .accordion-header {
+         cursor: pointer;
+         padding: 0.8rem 1rem;
+         background-color: #f5f5f5;
+         border-radius: 8px;
+         transition: background 0.3s;
+         font-weight: 500;
+        }
+
+        .accordion-header:hover {
+         background-color: #e0e0e0;
+        }
+
+        .accordion-content {
+          max-height: 0;
+          overflow: hidden;
+          transition: max-height 0.3s ease;
+          padding-left: 1rem;
+          margin: 0;
+          list-style: disc;
+        }
+
+        .admin-card {
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            text-align: center;
+            font-size: 16px;
+        }
+
+        .admin-tabs {
+          display: flex;
+          justify-content: center;
+          margin-top: 20px;
+        }
+
+        .tab-btn {
+          padding: 10px 20px;
+          margin: 0 10px;
+          border-radius: 8px;
+          border: none;
+          background: #eee;
+          cursor: pointer;
+        }
+
+        .tab-btn.active {
+          background: #5D4037;
+          color: white;
+        }
+
+        .admin-tab-content {
+          padding: 20px;
+        }
+
+        .admin-table {
+          width: 100%;
+          border-collapse: collapse;
+          margin-top: 20px;
+        }
+
+        .admin-table th, .admin-table td {
+          padding: 12px;
+          border-bottom: 1px solid #ddd;
+        }
+
+        .add-book-btn {
+          background: #28a745;
+          color: white;
+          padding: 10px 16px;
+          border: none;
+          border-radius: 8px;
+          cursor: pointer;
+          margin-bottom: 15px;
+        }
+
+        .reports-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 20px;
+        }
+
+        .report-box {
+          background: #fff;
+          padding: 20px;
+          border-radius: 12px;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .admin-actions {
+          display: flex;
+          gap: 8px;
+        }
+
+        .admin-btn {
+          padding: 6px 12px;
+          border-radius: 8px;
+          font-size: 13px;
+          cursor: pointer;
+          border: none;
+          transition: 0.25s ease;
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          font-weight: 500;
+        }
+
+        .btn-view {
+          background: #e8f2ff;
+          color: #0b67cf;
+        }
+        .btn-view:hover {
+          background: #d6e9ff;
+          transform: translateY(-2px);
+        }
+
+        .btn-edit {
+          background: #fff8e1;
+          color: #c48a00;
+        }
+        .btn-edit:hover {
+          background: #ffefc2;
+          transform: translateY(-2px);
+        }
+
+        .btn-delete {
+          background: #ffe7e7;
+          color: #d93025;
+        }
+        .btn-delete:hover {
+          background: #ffd6d6;
+          transform: translateY(-2px);
+        }
+
+        .admin-btn i {
+          font-size: 15px;
+        }
+
+        .admin-search {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            align-items: center;
+        }
+
+        .admin-search input {
+            flex: 1;
+            padding: 0.6rem 1rem;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+            background-color: #f9f9f9;
+        }
+
+        .admin-search button {
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            border: none;
+            background-color: #5D4037;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .admin-search button:hover {
+            background-color: #8D6E63;
+            transform: translateY(-2px);
+        }
+
+        .add-book-btn {
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            border: none;
+            background-color: #5D4037;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-bottom: 10px;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .add-book-btn:hover {
+            background-color: #8D6E63;
+            transform: translateY(-2px);
+        }
+
+        .member-btn i {
+          font-size: 15px;
+        }
+
+        .member-search {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            align-items: center;
+        }
+
+        .member-search input {
+            flex: 1;
+            padding: 0.6rem 1rem;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+            background-color: #f9f9f9;
+        }
+
+        .member-search button {
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            border: none;
+            background-color: #5D4037;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .member-search button:hover {
+            background-color: #8D6E63;
+            transform: translateY(-2px);
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(93, 64, 55, 0.3);
+            border-radius: 50%;
+            border-top-color: #5D4037;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 500;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transform: translateX(120%);
+            transition: transform 0.3s ease;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.success {
+            background-color: #2E7D32;
+        }
+
+        .notification.error {
+            background-color: #C62828;
+        }
+
+        .notification.info {
+            background-color: #0277BD;
+        }
+
+        /* تحسينات Responsive إضافية */
+        @media (max-width: 1024px) {
+            .admin-dashboard-cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .reports-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .admin-tabs {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            
+            .tab-btn {
+                flex: 1;
+                min-width: 120px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            #profile-avatar {
+                order: 0;
+                margin: 0;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .search-bar input {
+                flex: 1 1 100%;
+            }
+
+            .search-bar button {
+                width: 100%;
+            }
+
+            th,
+            td {
+                font-size: 0.9rem;
+                padding: 0.7rem;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .admin-dashboard-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .admin-actions {
+                flex-wrap: wrap;
+            }
+            
+            .admin-btn {
+                flex: 1;
+                min-width: 60px;
+                justify-content: center;
+            }
+            
+            .dashboard-cards {
+                flex-direction: column;
+            }
+            
+            .card {
+                flex: 1 1 100%;
+            }
+            
+            .admin-search, .member-search {
+                flex-direction: column;
+            }
+            
+            .admin-search input, .member-search input {
+                width: 100%;
+            }
+            
+            .admin-search button, .member-search button {
+                width: 100%;
+            }
+            
+            table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+            
+            .auth-container {
+                padding: 2rem 1.5rem;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                height: 50vh;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .feature-card {
+                padding: 1.5rem;
+            }
+            
+            .search-section, .profile-card {
+                padding: 1.5rem;
+            }
+            
+            .auth-container {
+                padding: 1.5rem 1rem;
+            }
+            
+            .tab-btn {
+                padding: 8px 12px;
+                font-size: 0.9rem;
+            }
+            
+            .admin-card {
+                padding: 15px;
+            }
+            
+            .admin-table th, .admin-table td {
+                padding: 8px;
+                font-size: 0.85rem;
+            }
+            
+            .pagination button {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* ===== MEMBER FULL VIEW PAGE ===== */
+
+        #memberFullView {
+            padding: 20px;
+        }
+
+        .back-btn {
+            background: #5D4037;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .member-name {
+            color: #5D4037;
+            margin-bottom: 10px;
+        }
+
+        .member-email {
+            color: #8D6E63;
+            margin-bottom: 20px;
+        }
+
+        .total-fine-title {
+            margin-top: 20px;
+            color: #5D4037;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="nav-container">
+            <span id="profile-avatar" class="hidden">
+                <a href="#" id="profile-initial" title="My Profile"></a>
+            </span>
+            <div class="logo">Community Library</div>
+            <div class="nav-links">
+                <a href="#home" id="navHome">Home</a>
+                <a href="#member" id="navMember" class="hidden">Member Dashboard</a>
+                <a href="#admin" id="navAdmin" class="hidden">Admin Panel</a>
+                <a href="#catalog" id="navCatalog">Catalog</a>
+                <a href="#about" id="navAbout">About</a>
+                <a href="#contact" id="navContact">Contact</a>
+
+                <span id="authLinks">
+                    <a href="#" id="navLogin">Login</a>
+                </span>
+
+                <span id="userLinks" class="hidden">
+                    <a href="#" id="navLogout">Logout</a>
+                </span>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Welcome to Our Community Library</h1>
+            <p>Explore thousands of physical books, borrow your next read, and connect with fellow book lovers</p>
+            <a href="#catalog" class="cta-button">Browse Catalog</a>
+        </div>
+    </section>
+
+    <div class="container">
+        <section class="features">
+            <div class="feature-card">
+                <div class="feature-icon">📚</div>
+                <h3>Extensive Collection</h3>
+                <p>Access thousands of physical books across all genres and subjects</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔍</div>
+                <h3>Smart Search</h3>
+                <p>Find exactly what you're looking for with our advanced catalog search</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🏛️</div>
+                <h3>Physical Access</h3>
+                <p>Visit our library location to browse and borrow books in person</p>
+            </div>
+        </section>
+
+        <section class="search-section">
+            <h2>Find Your Next Read</h2>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search by title, author, or category...">
+                <button id="searchBtn">Search</button>
+            </div>
+        </section>
+
+        <section class="catalog-section" id="catalog">
+            <h2 class="section-title">Book Catalog</h2>
+            <table id="booksTable">
+                <thead>
+                    <tr>
+                        <th data-key="title">Title</th>
+                        <th data-key="author">Author</th>
+                        <th data-key="category">Category</th>
+                        <th data-key="available">Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="5">Loading books...</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="pagination" id="pagination"></div>
+        </section>
+
+        <section id="about" class="catalog-section hidden">
+            <h2 class="section-title">About Us</h2>
+            <p style="text-align: center;">We are a community library dedicated to providing free access to knowledge through physical books and resources. Our mission is to foster a love of reading and learning in our community.</p>
+        </section>
+
+        <section id="contact" class="catalog-section hidden">
+            <h2 class="section-title">Contact Us</h2>
+            <p style="text-align: center;">
+                Visit us at: 123 Library Lane, Bookville<br>
+                Email us at: info@communitylibrary.com<br>
+                Phone: (555) 123-4567<br>
+                Hours: Mon-Fri 9am-8pm, Sat 10am-6pm, Sun 12pm-5pm
+            </p>
+        </section>
+
+        <section id="profilePage" class="catalog-section hidden">
+            <h2 class="section-title">My Profile</h2>
+            <div class="profile-card">
+                <h3 style="margin-bottom: 1.5rem; color: #8D6E63;">Account Details</h3>
+                <div class="profile-detail">
+                    <strong>Username:</strong> <span id="profileUsername">N/A</span>
+                </div>
+                <div class="profile-detail">
+                    <strong>Email:</strong> <span id="profileEmail">N/A</span>
+                </div>
+                <div class="profile-detail">
+                    <strong>Member Since:</strong> <span id="profileDate">N/A</span>
+                </div>
+                <div class="profile-detail">
+                    <strong>Books Borrowed:</strong> <span id="profileBooks">0</span>
+                </div>
+                <div class="profile-detail">
+                    <strong>Total Fines:</strong> $<span id="profileTotalFines">0.00</span>
+                </div>
+
+                <button class="auth-button" id="editProfileBtn"
+                    style="width: 100%; margin-top: 2rem; background-color: #8D6E63;">
+                    Edit Profile
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <section class="auth-page hidden" id="editProfilePage">
+        <div class="auth-container">
+            <h2>Edit Your Profile</h2>
+            <form id="editProfileForm">
+                <div class="form-group">
+                    <label for="editUsername">Username</label>
+                    <input type="text" id="editUsername" name="username" required>
+                    <div class="error-message" id="editUsernameError"></div>
+                </div>
+                <div class="form-group">
+                    <label for="editEmail">Email</label>
+                    <input type="email" id="editEmail" name="email" required>
+                    <div class="error-message" id="editEmailError"></div>
+                </div>
+                <button type="submit" class="auth-button">Save Changes</button>
+                <button type="button" id="cancelEditBtn" class="auth-button"
+                    style="background-color: #BCAAA4; margin-top: 1rem;">Cancel</button>
+            </form>
+        </div>
+    </section>
+
+    <section class="auth-page hidden" id="loginPage">
+        <div class="auth-container">
+            <h2>Login to Your Account</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" name="email" required>
+                    <div class="error-message" id="loginEmailError"></div>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" name="password" maxlength="6" required>
+                    <div class="error-message" id="loginPasswordError"></div>
+                </div>
+                <button type="submit" class="auth-button">Login</button>
+                <p class="switch-form">
+                    Don't have an account? <a href="#" id="switchToRegister">Register here</a>
+                </p>
+            </form>
+        </div>
+    </section>
+
+    <section class="auth-page hidden" id="registerPage">
+        <div class="auth-container">
+            <h2>Create New Account</h2>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="registerUsername">Username</label>
+                    <input type="text" id="registerUsername" name="username" required>
+                    <div class="error-message" id="registerUsernameError"></div>
+                </div>
+                <div class="form-group">
+                    <label for="registerEmail">Email</label>
+                    <input type="email" id="registerEmail" name="email" required>
+                    <div class="error-message" id="registerEmailError"></div>
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword">Password</label>
+                    <input type="password" id="registerPassword" name="password" maxlength="6" required>
+                    <div class="error-message" id="registerPasswordError"></div>
+                </div>
+                <div class="form-group">
+                    <label for="registerConfirmPassword">Confirm Password</label>
+                    <input type="password" id="registerConfirmPassword" name="confirmPassword" maxlength="6" required>
+                    <div class="error-message" id="registerConfirmPasswordError"></div>
+                </div>
+                <button type="submit" class="auth-button">Register</button>
+                <p class="switch-form">
+                    Already have an account? <a href="#" id="switchToLogin">Login here</a>
+                </p>
+            </form>
+        </div>
+    </section>
+       
+    <!-- Member Dashboard -->
+    <div id="member" class="page hidden">
+        <div class="container">
+            <h2 class="section-title">Welcome, <span id="memberName">Member</span>!</h2>
+            <div class="dashboard-cards">
+            <div class="card">
+               <h3>Profile 👤</h3>
+               <p>Name: <span id="memberProfileName"></span></p>
+               <p>Email: <span id="memberProfileEmail"></span></p>
+           </div>
+
+            <div class="card">
+               <h3>Books Borrowed 📚</h3>
+               <ul id="memberBorrowedBooks"></ul>
+           </div>
+
+          <div class="card">
+            <h3 class="accordion-header">Notifications 🔔 (<span id="notifCount">0</span>)</h3>
+            <ul class="accordion-content" id="memberNotifications">
+            </ul>
+          </div>
+      </div>
+      </div>
+
+    <div class="container">
+    <div class="card">
+        <h2 class="section-title">Your Borrowed Books</h2>
+        <table id="memberBorrowedTable">
+          <thead>
+             <tr>
+             <th>Title</th>
+             <th>Author</th>
+             <th>Category</th>
+             <th>Status</th>
+            </tr>
+         </thead>
+         <tbody>
+         </tbody>
+        </table>
+        <h2 class="section-title">Your Pending Reservations</h2>
+        <table id="memberReservationsTable">
+          <thead>
+             <tr>
+             <th>Title</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Action</th>
+            </tr>
+         </thead>
+         <tbody>
+         </tbody>
+        </table>
+    </div>
+    </div>
+    </div>
+
+    <!-- ======================= ADMIN PANEL ======================= -->
+    <div id="admin" class="page hidden">
+        <!-- Dashboard Top Cards -->
+        <div class="container">
+            <h2 class="section-title">Admin Dashboard</h2>
+
+            <div class="admin-dashboard-cards">
+                <div class="admin-card">    
+                    <h3>Total Members 👥</h3>
+                    <p id="statMembers">150 Members</p>
+                </div>
+
+                <div class="admin-card">
+                    <h3>Total Books 📚</h3>
+                    <p id="statBooks">300 Books</p>
+                </div>
+
+                <div class="admin-card">
+                    <h3>Pending Returns ⏰</h3>
+                    <p id="statReturns">5 Pending</p>
+                </div>
+
+                <div class="admin-card">
+                    <h3>Most Borrowed Book ⭐</h3>
+                    <p id="statTopBook">1984</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ======== ADMIN TABS (Members – Books – Reports) ======== -->
+        <div class="admin-tabs">
+            <button class="tab-btn active" data-tab="membersTab">Members</button>
+            <button class="tab-btn" data-tab="booksTab">Books</button>
+            <button class="tab-btn" data-tab="reportsTab">Reports</button>
+        </div>
+
+        <!-- ======================= MEMBERS MANAGEMENT ======================= -->
+        <section id="membersTab" class="admin-tab-content">
+            <div class="member-search">
+                <input type="text" id="memberBookSearch" placeholder="Search books by name ..." />
+                <button id="memberSearchBtn" class="member-btn">Search</button>
+            </div>
+
+            <h2 class="section-title">Manage Members</h2>
+            <table id="membersTable" class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Books Borrowed</th>
+                        <th>Total Fines</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+            <h2 class="section-title">Pending Reservations</h2>
+            <table id="adminReservationsTable" class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Member</th>
+                    <th>Book</th>
+                    <th>Date</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+            </table>            
+        </section>
+
+        <!-- ======================= BOOKS MANAGEMENT ======================= -->
+        <section id="booksTab" class="admin-tab-content hidden">
+            <h2 class="section-title">Manage Books</h2>
+
+            <!-- Search Bar -->
+            <div class="admin-search">
+                <input type="text" id="adminBookSearch" placeholder="Search books by title, author, or category..." />
+                <button id="adminSearchBtn" class="admin-btn">Search</button>
+            </div>
+
+            <button class="add-book-btn">+ Add New Book</button>
+
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>Category</th>
+                        <th>Total Copies</th>
+                        <th>Available Copies</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="booksTableAdmin">
+                    <tr><td colspan="6">Loading books...</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- ======================= REPORTS SECTION ======================= -->
+        <section id="reportsTab" class="admin-tab-content hidden">
+            <h2 class="section-title">Reports & Statistics</h2>
+
+            <div class="reports-grid">
+                <div class="report-box">
+                    <h3>Most Borrowed Books</h3>
+                    <ul id="reportMostBorrowed">
+                        <li>Loading...</li>
+                    </ul>
+                </div>
+
+                <div class="report-box">
+                    <h3>Member Activity</h3>
+                    <ul id="reportMemberActivity">
+                        <li>Loading...</li>
+                    </ul>
+                </div>
+            </div>
+            <div style="margin-top:12px;">
+                <button onclick="downloadMostBorrowedCSV()" class="admin-btn">Download Most Borrowed (CSV)</button>
+                <button onclick="printReportsAsPDF()" class="admin-btn">Print Reports (PDF)</button>
+            </div>
+        </section>
+    </div>
+
+
+    <!-- ========== MEMBER FULL VIEW PAGE ========== -->
+    <section id="memberFullView" class="admin-tab-content hidden">
+        <h2 class="section-title">Member Borrowed Books Details</h2>
+
+        <button id="backToMembersBtn" class="admin-btn back-btn">
+            ← Back to Members
+        </button>
+
+        <h3 id="memberFullViewName" class="member-name"></h3>
+        <h4 id="memberFullViewEmail" class="member-email"></h4>
+
+        <table class="admin-table" id="memberFullViewTable">
+            <thead>
+                <tr>
+                    <th>Book Title</th>
+                    <th>Fine ($)</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+        <h3 class="total-fine-title">
+            Total Fine: $<span id="memberFullTotalFine">0.00</span>
+        </h3>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Community Library. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // ==================== CONFIGURATION ====================
+        const API_BASE_URL = "http://localhost:3000/api"; // Change this to your actual backend URL
+        
+        // ==================== STATE MANAGEMENT ====================
+        const state = {
+            books: [],
+            users: {},
+            currentUser: null,
+            isLoading: false,
+            error: null
+        };
+
+        let booksData = [];
+        let currentPage = 1;
+        const rowsPerPage = 5;
+        let currentSort = { key: '', order: '' };
+        let isLoggedIn = false;
+        let isAdmin = false;
+        let userInitial = "";
+
+        // ==================== UTILITY FUNCTIONS ====================
+        
+        function setErrorMessage(elementId, message) {
+            document.getElementById(elementId).textContent = message;
+        }
+
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 100);
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
+
+        function showLoading() {
+            if (document.querySelector('.loading-overlay')) return;
+            
+            const overlay = document.createElement('div');
+            overlay.className = 'loading-overlay';
+            overlay.innerHTML = '<div class="loading"></div>';
+            document.body.appendChild(overlay);
+        }
+
+        function hideLoading() {
+            const overlay = document.querySelector('.loading-overlay');
+            if (overlay) {
+                document.body.removeChild(overlay);
+            }
+        }
+
+        async function apiCall(endpoint, options = {}) {
+            const token = localStorage.getItem('token');
+            const defaultOptions = {
+                headers: {
+                    'Content-Type': 'application/json',
+                    ...(token && { 'Authorization': `Bearer ${token}` }),
+                    ...options.headers
+                }
+            };
+
+            try {
+                const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+                    ...defaultOptions,
+                    ...options
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json().catch(() => ({}));
+                    throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
+                }
+
+                return await response.json();
+            } catch (error) {
+                console.error(`API Error (${endpoint}):`, error);
+                throw error;
+            }
+        }
+
+        // ==================== AUTHENTICATION FUNCTIONS ====================
+
+        async function loginUser(email, password) {
+            try {
+                showLoading();
+                const data = await apiCall('/auth/login', {
+                    method: 'POST',
+                    body: JSON.stringify({ email, password })
+                });
+
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('user', JSON.stringify(data.user));
+                
+                state.currentUser = data.user;
+                isLoggedIn = true;
+                isAdmin = data.user.role === 'admin';
+                userInitial = data.user.email.charAt(0);
+                
+                updateNav();
+                showNotification('Login successful!', 'success');
+                showPage("home");
+                
+                return data;
+            } catch (error) {
+                showNotification(error.message || 'Login failed', 'error');
+                throw error;
+            } finally {
+                hideLoading();
+            }
+        }
+
+        async function registerUser(userData) {
+            try {
+                showLoading();
+                const data = await apiCall('/auth/register', {
+                    method: 'POST',
+                    body: JSON.stringify(userData)
+                });
+
+                showNotification('Registration successful! Please login.', 'success');
+                return data;
+            } catch (error) {
+                showNotification(error.message || 'Registration failed', 'error');
+                throw error;
+            } finally {
+                hideLoading();
+            }
+        }
+
+        async function updateUserProfile(profileData) {
+            try {
+                showLoading();
+                const data = await apiCall('/users/profile', {
+                    method: 'PUT',
+                    body: JSON.stringify(profileData)
+                });
+
+                state.currentUser = { ...state.currentUser, ...data.user };
+                localStorage.setItem('user', JSON.stringify(state.currentUser));
+                
+                showNotification('Profile updated successfully!', 'success');
+                return data;
+            } catch (error) {
+                showNotification(error.message || 'Profile update failed', 'error');
+                throw error;
+            } finally {
+                hideLoading();
+            }
+        }
+
+        function logoutUser() {
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            state.currentUser = null;
+            isLoggedIn = false;
+            isAdmin = false;
+            userInitial = "";
+            
+            updateNav();
+            showNotification('Logged out successfully', 'info');
+            showPage("home");
+        }
+
+        function checkAuthStatus() {
+            const token = localStorage.getItem('token');
+            const userData = localStorage.getItem('user');
+            
+            if (token && userData) {
+                try {
+                    state.currentUser = JSON.parse(userData);
+                    isLoggedIn = true;
+                    isAdmin = state.currentUser.role === 'admin';
+                    userInitial = state.currentUser.email.charAt(0);
+                    updateNav();
+                } catch (error) {
+                    console.error('Error parsing user data:', error);
+                    logoutUser();
+                }
+            }
+        }
+
+        // ==================== BOOKS FUNCTIONS ====================
+
+        async function fetchBooks() {
+            try {
+                showLoading();
+                const data = await apiCall('/books');
+                state.books = data.books || [];
+                booksData = [...state.books];
+                renderTable();
+                renderPagination();
+                return data;
+            } catch (error) {
+                console.error("Error fetching books:", error);
+                document.querySelector("#booksTable tbody").innerHTML = 
+                    `<tr><td colspan="5">Failed to load books. Please try again later.</td></tr>`;
+                throw error;
+            } finally {
+                hideLoading();
+            }
+        }
+
+        async function borrowBook(bookId) {
+            if (!isLoggedIn) {
+                showNotification("Please login to borrow books.", 'error');
+                return;
+            }
+
+            try {
+                showLoading();
+                await apiCall(`/books/${bookId}/borrow`, {
+                    method: 'POST'
+                });
+                
+                showNotification('Book borrowed successfully!', 'success');
+                await fetchBooks(); // Refresh books data
+                if (isAdmin) {
+                    await fetchAdminData();
+                }
+            } catch (error) {
+                showNotification(error.message || 'Failed to borrow book', 'error');
+            } finally {
+                hideLoading();
+            }
+        }
+
+        async function returnBook(bookId) {
+            try {
+                showLoading();
+                await apiCall(`/books/${bookId}/return`, {
+                    method: 'POST'
+                });
+                
+                showNotification('Book returned successfully!', 'success');
+                await fetchBooks(); // Refresh books data
+                if (isAdmin) {
+                    await fetchAdminData();
+                }
+            } catch (error) {
+                showNotification(error.message || 'Failed to return book', 'error');
+            } finally {
+                hideLoading();
+            }
+        }
+
+        // ==================== ADMIN FUNCTIONS ====================
+
+        async function fetchAdminData() {
+            if (!isAdmin) return;
+            
+            try {
+                showLoading();
+                const [membersData, booksData, statsData] = await Promise.all([
+                    apiCall('/admin/members'),
+                    apiCall('/admin/books'),
+                    apiCall('/admin/stats')
+                ]);
+
+                // Update admin dashboard
+                updateAdminStats(statsData);
+                renderAdminMembers(membersData.members || []);
+                renderAdminBooks(booksData.books || []);
+                
+            } catch (error) {
+                console.error('Error fetching admin data:', error);
+                showNotification('Failed to load admin data', 'error');
+            } finally {
+                hideLoading();
+            }
+        }
+
+        async function updateAdminStats(stats) {
+            document.getElementById("statMembers").textContent = `${stats.totalMembers || 0} Members`;
+            document.getElementById("statBooks").textContent = `${stats.totalBooks || 0} Books`;
+            document.getElementById("statReturns").textContent = `${stats.pendingReturns || 0} Pending`;
+            document.getElementById("statTopBook").textContent = stats.mostBorrowedBook || 'No Data';
+        }
+
+        // ==================== UI UPDATE FUNCTIONS ====================
+
+        function updateNav() {
+            const authLinks = document.getElementById('authLinks');
+            const userLinks = document.getElementById('userLinks');
+            const profileAvatar = document.getElementById('profile-avatar');
+            const profileInitial = document.getElementById('profile-initial');
+            const navMember = document.getElementById("navMember");
+            const navAdmin = document.getElementById("navAdmin");
+
+            if (isLoggedIn) {
+                authLinks.classList.add('hidden');
+                userLinks.classList.remove('hidden');
+                profileAvatar.classList.remove('hidden');
+               
+                if (userInitial) {
+                    profileInitial.textContent = userInitial.toUpperCase();
+                } else {
+                    profileInitial.textContent = 'U';
+                }
+                
+                if (isAdmin) {
+                    navAdmin.classList.remove("hidden");
+                    navMember.classList.add("hidden");
+                } else {
+                    navMember.classList.remove("hidden");
+                    navAdmin.classList.add("hidden");
+                }
+            } else {
+                authLinks.classList.remove('hidden');
+                userLinks.classList.add('hidden');
+                profileAvatar.classList.add('hidden');
+                navMember.classList.add("hidden");
+                navAdmin.classList.add("hidden");
+                profileInitial.textContent = '';
+            }
+        }
+
+        function updateProfilePage() {
+            if (!state.currentUser) return;
+            
+            document.getElementById("profileUsername").textContent = state.currentUser.username || "N/A";
+            document.getElementById("profileEmail").textContent = state.currentUser.email || "N/A";
+            document.getElementById("profileDate").textContent = state.currentUser.memberSince || "N/A";
+            document.getElementById("profileBooks").textContent = state.currentUser.borrowedBooksCount || 0;
+            document.getElementById("profileTotalFines").textContent = (state.currentUser.totalFines || 0).toFixed(2);
+        }
+
+        function renderTable() {
+            const tbody = document.querySelector("#booksTable tbody");
+            tbody.innerHTML = "";
+
+            const start = (currentPage - 1) * rowsPerPage;
+            const end = start + rowsPerPage;
+            const pageData = booksData.slice(start, end);
+
+            if (pageData.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5">No books found. Try a different search term.</td></tr>`;
+                return;
+            }
+
+            pageData.forEach(book => {
+                const tr = document.createElement("tr");
+                const availableCopies = book.availableCopies || 0;
+                
+                let actionHtml = "";
+                if (isLoggedIn && !isAdmin) {
+                    if (availableCopies > 0) {
+                        actionHtml = `
+                            <button class="admin-btn" onclick="borrowBook(${book.id})">
+                                Borrow
+                            </button>
+                        `;
+                    } else {
+                        actionHtml = `
+                            <button class="admin-btn" onclick="joinWaitingList(${book.id})" 
+                                    ${book.waitingList && book.waitingList.length >= book.totalCopies ? 'disabled' : ''}>
+                                ${book.waitingList && book.waitingList.length >= book.totalCopies ? 'Waiting Full' : 'Reserve (Waiting List)'}
+                            </button>
+                        `;
+                    }
+                } else if (isLoggedIn && isAdmin) {
+                    actionHtml = `
+                        <button class="admin-btn btn-edit" onclick="editBook(${book.id})">Edit</button>
+                        <button class="admin-btn btn-delete" onclick="deleteBook(${book.id})">Delete</button>
+                    `;
+                }
+
+                tr.innerHTML = `
+                    <td>${book.title}</td>
+                    <td>${book.author}</td>
+                    <td>${book.category}</td>
+                    <td>
+                        <span class="${availableCopies > 0 ? 'status-available' : 'status-borrowed'}">
+                            ${availableCopies > 0 ? availableCopies + " Available" : "All Copies Borrowed"}
+                        </span>
+                    </td>
+                    <td>${actionHtml}</td>
+                `;
+
+                tbody.appendChild(tr);
+            });
+        }
+
+        function renderPagination() {
+            const paginationDiv = document.getElementById("pagination");
+            paginationDiv.innerHTML = "";
+
+            const totalPages = Math.ceil(booksData.length / rowsPerPage);
+            for (let i = 1; i <= totalPages; i++) {
+                const btn = document.createElement("button");
+                btn.textContent = i;
+                btn.classList.toggle("active", i === currentPage);
+                btn.addEventListener("click", () => {
+                    currentPage = i;
+                    renderTable();
+                    renderPagination();
+                });
+                paginationDiv.appendChild(btn);
+            }
+        }
+
+        function searchBooks() {
+            const query = document.getElementById("searchInput").value.toLowerCase();
+            currentPage = 1;
+            booksData = state.books.filter(book =>
+                book.title.toLowerCase().includes(query) ||
+                book.author.toLowerCase().includes(query) ||
+                book.category.toLowerCase().includes(query)
+            );
+            renderTable();
+            renderPagination();
+        }
+
+        function sortBooks(key) {
+            const order = currentSort.key === key && currentSort.order === 'asc' ? 'desc' : 'asc';
+            booksData.sort((a, b) => {
+                if (a[key] < b[key]) return order === 'asc' ? -1 : 1;
+                if (a[key] > b[key]) return order === 'asc' ? 1 : -1;
+                return 0;
+            });
+
+            currentSort = { key, order };
+            document.querySelectorAll("th").forEach(th => th.classList.remove("sort-asc", "sort-desc"));
+            document.querySelector(`th[data-key="${key}"]`).classList.add(order === 'asc' ? 'sort-asc' : 'sort-desc');
+
+            renderTable();
+        }
+
+        // ==================== PAGE NAVIGATION ====================
+
+        function showPage(page, e = null) {
+            if (e) e.preventDefault();
+
+            // Hide all sections
+            const allSections = [
+                document.querySelector(".hero"),
+                document.querySelector(".container"),
+                document.querySelector("footer"),
+                document.getElementById("loginPage"),
+                document.getElementById("registerPage"),
+                document.getElementById("editProfilePage"),
+                document.getElementById("member"),  
+                document.getElementById("admin"),
+                document.getElementById("memberFullView")
+            ];
+
+            const containerSections = document.querySelectorAll(".container > section");
+
+            allSections.forEach(section => {
+                if (section) section.classList.add("hidden");
+            });
+            containerSections.forEach(section => section.classList.add("hidden"));
+
+            // Show requested page
+            switch (page) {
+                case "home":
+                    document.querySelector(".hero").classList.remove("hidden");
+                    document.querySelector(".container").classList.remove("hidden");
+                    document.querySelector("footer").classList.remove("hidden");
+                    document.querySelector(".features").classList.remove("hidden");
+                    document.querySelector(".search-section").classList.remove("hidden");
+                    document.getElementById("catalog").classList.remove("hidden");
+                    renderTable();
+                    renderPagination();
+                    break;
+                    
+                case "catalog":
+                    document.querySelector(".container").classList.remove("hidden");
+                    document.querySelector("footer").classList.remove("hidden");
+                    document.querySelector(".search-section").classList.remove("hidden");
+                    document.getElementById("catalog").classList.remove("hidden");
+                    break;
+                    
+                case "about":
+                    document.querySelector(".container").classList.remove("hidden");
+                    document.querySelector("footer").classList.remove("hidden");
+                    document.getElementById("about").classList.remove("hidden");
+                    break;
+                    
+                case "contact":
+                    document.querySelector(".container").classList.remove("hidden");
+                    document.querySelector("footer").classList.remove("hidden");
+                    document.getElementById("contact").classList.remove("hidden");
+                    break;
+                    
+                case "login":
+                    document.getElementById("loginPage").classList.remove("hidden");
+                    document.querySelector("footer").classList.remove("hidden");
+                    break;
+                    
+                case "register":
+                    document.getElementById("registerPage").classList.remove("hidden");
+                    document.querySelector("footer").classList.remove("hidden");
+                    break;
+                    
+                case "profile":
+                    if (isLoggedIn) {
+                        updateProfilePage();
+                        document.querySelector(".container").classList.remove("hidden");
+                        document.querySelector("footer").classList.remove("hidden");
+                        document.getElementById("profilePage").classList.remove("hidden");
+                    } else {
+                        showPage("login");
+                    }
+                    break;
+                    
+                case "edit":
+                    if (isLoggedIn) {
+                        document.getElementById("editUsername").value = state.currentUser.username;
+                        document.getElementById("editEmail").value = state.currentUser.email;
+                        document.getElementById("editProfilePage").classList.remove("hidden");
+                        document.querySelector("footer").classList.remove("hidden");
+                    } else {
+                        showPage("login");
+                    }
+                    break;
+                    
+                case "member":
+                    if (isLoggedIn && !isAdmin) {
+                        document.querySelector(".container").classList.remove("hidden");
+                        document.querySelector("footer").classList.remove("hidden");
+                        document.querySelectorAll(".container > section").forEach(sec => sec.classList.add("hidden"));
+                        document.getElementById("member").classList.remove("hidden");
+                        updateMemberDashboard();
+                    } else {
+                        showPage("home");
+                    }
+                    break;
+                    
+                case "admin":
+                    if (isLoggedIn && isAdmin) {
+                        document.querySelector(".container").classList.remove("hidden");
+                        document.querySelector("footer").classList.remove("hidden");
+                        document.querySelectorAll(".container > section").forEach(sec => sec.classList.add("hidden"));
+                        document.getElementById("admin").classList.remove("hidden");
+                        fetchAdminData();
+                    } else {
+                        showPage("home");
+                    }
+                    break;
+            }
+        }
+
+        // ==================== EVENT LISTENERS ====================
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check authentication status on page load
+            checkAuthStatus();
+            
+            // Fetch books on page load
+            fetchBooks();
+            
+            // Navigation
+            document.getElementById("navHome").addEventListener("click", (e) => showPage("home", e));
+            document.getElementById("navCatalog").addEventListener("click", (e) => showPage("catalog", e));
+            document.getElementById("navAbout").addEventListener("click", (e) => showPage("about", e));
+            document.getElementById("navContact").addEventListener("click", (e) => showPage("contact", e));
+            document.getElementById("navLogin").addEventListener("click", (e) => showPage("login", e));
+            document.getElementById("navLogout").addEventListener("click", logoutUser);
+            document.getElementById("profile-initial").addEventListener("click", (e) => showPage("profile", e));
+            document.getElementById("navMember").addEventListener("click", (e) => showPage("member", e));
+            document.getElementById("navAdmin").addEventListener("click", (e) => showPage("admin", e));
+
+            // Auth forms
+            document.getElementById("switchToRegister").addEventListener("click", (e) => showPage("register", e));
+            document.getElementById("switchToLogin").addEventListener("click", (e) => showPage("login", e));
+            
+            // Profile
+            document.getElementById("editProfileBtn").addEventListener("click", (e) => showPage("edit", e));
+            document.getElementById("cancelEditBtn").addEventListener("click", (e) => showPage("profile", e));
+
+            // Search and sorting
+            document.getElementById("searchBtn").addEventListener("click", searchBooks);
+            document.getElementById("searchInput").addEventListener("keypress", function (e) {
+                if (e.key === 'Enter') searchBooks();
+            });
+            document.querySelectorAll("th").forEach(th => {
+                th.addEventListener("click", () => sortBooks(th.dataset.key));
+            });
+
+            // Form submissions
+            document.getElementById("loginForm").addEventListener("submit", handleLogin);
+            document.getElementById("registerForm").addEventListener("submit", handleRegister);
+            document.getElementById("editProfileForm").addEventListener("submit", handleEditProfile);
+
+            // Admin tabs
+            document.querySelectorAll(".tab-btn").forEach(btn => {
+                btn.addEventListener("click", () => {
+                    document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+                    btn.classList.add("active");
+
+                    document.querySelectorAll(".admin-tab-content").forEach(sec => sec.classList.add("hidden"));
+                    document.getElementById(btn.dataset.tab).classList.remove("hidden");
+                });
+            });
+
+            // Show home page by default
+            showPage("home");
+        });
+
+        // ==================== FORM HANDLERS ====================
+
+        async function handleLogin(e) {
+            e.preventDefault();
+            
+            let valid = true;
+            const email = document.getElementById("loginEmail").value.trim();
+            const password = document.getElementById("loginPassword").value.trim();
+
+            setErrorMessage("loginEmailError", "");
+            setErrorMessage("loginPasswordError", "");
+
+            if (email === "") {
+                setErrorMessage("loginEmailError", "Email is required.");
+                valid = false;
+            }
+            if (password === "") {
+                setErrorMessage("loginPasswordError", "Password is required.");
+                valid = false;
+            }
+            
+            if (password.length !== 6) {
+                setErrorMessage("loginPasswordError", "Password must be exactly 6 characters.");
+                valid = false;
+            }
+
+            if (valid) {
+                try {
+                    await loginUser(email, password);
+                    document.getElementById("loginForm").reset();
+                } catch (error) {
+                    // Error is already handled in loginUser function
+                }
+            }
+        }
+
+        async function handleRegister(e) {
+            e.preventDefault();
+            
+            let valid = true;
+            const username = document.getElementById("registerUsername").value.trim();
+            const email = document.getElementById("registerEmail").value.trim();
+            const password = document.getElementById("registerPassword").value.trim();
+            const confirmPassword = document.getElementById("registerConfirmPassword").value.trim();
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; 
+
+            setErrorMessage("registerUsernameError", "");
+            setErrorMessage("registerEmailError", "");
+            setErrorMessage("registerPasswordError", "");
+            setErrorMessage("registerConfirmPasswordError", "");
+
+            if (username.length < 3) {
+                setErrorMessage("registerUsernameError", "Username must be at least 3 characters.");
+                valid = false;
+            }
+            
+            if (!emailRegex.test(email)) {
+                setErrorMessage("registerEmailError", "Enter a valid email address (e.g., name@domain.com).");
+                valid = false;
+            }
+
+            if (password.length !== 6) {
+                setErrorMessage("registerPasswordError", "Password must be exactly 6 characters.");
+                valid = false;
+            }
+
+            if (password !== confirmPassword) {
+                setErrorMessage("registerConfirmPasswordError", "Passwords do not match.");
+                valid = false;
+            }
+
+            if (valid) {
+                try {
+                    await registerUser({ username, email, password });
+                    document.getElementById("registerForm").reset();
+                    showPage("login");
+                } catch (error) {
+                    // Error is already handled in registerUser function
+                }
+            }
+        }
+
+        async function handleEditProfile(e) {
+            e.preventDefault();
+            
+            let valid = true;
+            const newUsername = document.getElementById("editUsername").value.trim();
+            const newEmail = document.getElementById("editEmail").value.trim();
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            setErrorMessage("editUsernameError", "");
+            setErrorMessage("editEmailError", "");
+
+            if (newUsername.length < 3) {
+                setErrorMessage("editUsernameError", "Username must be at least 3 characters.");
+                valid = false;
+            }
+            
+            if (!emailRegex.test(newEmail)) {
+                setErrorMessage("editEmailError", "Enter a valid email address (e.g., name@domain.com).");
+                valid = false;
+            }
+
+            if (valid) {
+                try {
+                    await updateUserProfile({ username: newUsername, email: newEmail });
+                    showPage("profile");
+                } catch (error) {
+                    // Error is already handled in updateUserProfile function
+                }
+            }
+        }
+
+        // ==================== PLACEHOLDER FUNCTIONS ====================
+        // These functions need to be implemented based on your backend API
+
+        function updateMemberDashboard() {
+            // To be implemented based on backend API
+            console.log("Update member dashboard");
+        }
+
+        function renderAdminMembers(members) {
+            // To be implemented based on backend API
+            console.log("Render admin members", members);
+        }
+
+        function renderAdminBooks(books) {
+            // To be implemented based on backend API
+            console.log("Render admin books", books);
+        }
+
+        function joinWaitingList(bookId) {
+            // To be implemented based on backend API
+            console.log("Join waiting list for book", bookId);
+        }
+
+        function editBook(bookId) {
+            // To be implemented based on backend API
+            console.log("Edit book", bookId);
+        }
+
+        function deleteBook(bookId) {
+            // To be implemented based on backend API
+            console.log("Delete book", bookId);
+        }
+
+        function downloadMostBorrowedCSV() {
+            // To be implemented based on backend API
+            console.log("Download most borrowed CSV");
+        }
+
+        function printReportsAsPDF() {
+            // To be implemented based on backend API
+            console.log("Print reports as PDF");
+        }
+
+    </script>
+
+</body>
+
+</html>
